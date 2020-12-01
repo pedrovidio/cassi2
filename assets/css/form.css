@@ -1,0 +1,111 @@
+#formBody{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#contact-details{
+  background-color: rgb(231, 230, 230);
+  padding: 10px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#details{
+  display: grid;
+  grid-template-columns: repeat(2,2fr);
+}
+
+.btSave{
+  margin-top: 10px;
+  background-color: rgb(179, 177, 177);
+  color: rgb(82, 81, 81);
+  border: 0;
+  padding: 5px;
+  border-radius: 5px;
+  display: none;
+}
+
+.btsim{
+  background-color: rgb(68, 157, 68);
+  color: #fff;
+  border: 0;
+  width: 150px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.btnao{
+  background-color: rgb(202, 86, 86);
+  color: #fff;
+  border: 0;
+  width: 150px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#quest-hidden-submit{
+  margin-top: 10px;
+}
+
+.btsuccess{
+  background-color: rgb(179, 177, 177);
+  color: rgb(82, 81, 81);
+  border: 0;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.btsim:hover, .btnao:hover, .btsuccess:hover{
+  opacity: 0.8;
+}
+
+#quest-hidden, #agendar, #quest-hidden-a3, .quest-hidden-submit{
+  display: none;
+}
+
+#crivo-hidden-submit{
+  display: none;
+}
+
+input[type='date'], input[type='time'], input[type='text'], input[type='password'] {
+  width: 150px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+input[type='text'], input[type='password'] {
+  width: 250px;
+}
+
+select{
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+#msg_import{
+  margin-top: 10px;
+  width: 300px;
+  border: 1px solid rgb(68, 157, 68);
+  background-color: #fff;
+  text-align: center;
+  color:rgb(68, 157, 68);
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.input-form-oper{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-success{
+  margin-top: 10px;
+}

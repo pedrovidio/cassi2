@@ -1,0 +1,80 @@
+#modal{
+  position: absolute;
+  width: 100%;
+  height: 90%;
+  display: none;
+  background-color: rgb(0, 0, 0, 0.5);
+  transition: opacity .5s linear;
+  z-index: 9999;
+}
+
+#modal-content{
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#modal-body, #success{
+  width: 350px;
+  height: 200px;
+  border: 3px solid rgb(42, 148, 194);
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
+#success{
+  display: none;
+}
+
+#success div{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#success div strong{
+  color: rgb(68, 157, 68);
+}
+
+#success div button{
+  padding: 5px;
+  border: 0;
+  border-radius: 5px;
+  background-color: rgb(68, 157, 68);
+  color: #fff;
+}
+
+#qtdColeta{
+  border: 1px solid rgb(224, 222, 222);
+  width: 80px;
+  margin: 20px 0;
+}
+
+#modal-body strong{
+  margin-bottom: 10px;
+  color: #000;
+}
+
+#btQtd, #btQtdClose{
+  padding: 5px;
+  border: 0;
+  border-radius: 5px;
+  background-color: rgb(68, 157, 68);
+  color: #fff;
+}
+
+#btQtdClose{
+  background-color: rgb(202, 86, 86);
+}
+
+#btQtd:hover, #btQtdClose:hover{
+  opacity: 0.5;
+}

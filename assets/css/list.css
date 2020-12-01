@@ -1,0 +1,42 @@
+.content{
+  width: 100%;
+}
+
+.list{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Ativo, .Inativo{
+  width: 70px;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  color: #fff;
+}
+
+.Ativo:hover, .Inativo:hover{
+  opacity: 0.8;
+}
+
+.Ativo{
+  background-color: rgb(68, 157, 68);
+}
+
+.Inativo{
+  background-color: rgb(202, 86, 86);
+}
+
+.Ativo a, .Inativo a{
+  color: #fff;
+}
+
+.Ativo a:hover, .Inativo a:hover{
+  color: #fff;
+  text-decoration: none;
+}
+
+svg{
+  width: 30px;
+}
