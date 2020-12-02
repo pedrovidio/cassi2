@@ -13,7 +13,7 @@ class Redistribute extends CI_Controller {
 
     public function index(){
       $opers = $this->opers->findActive();
-
+var_dump($opers);die;
       if(empty($opers)){
         redirect(base_url('admin/home/index/err'));
       }
