@@ -1,7 +1,8 @@
 <div id="formBody">
+<?php if(!empty($msg)){ echo "<div class='alert alert-warning'>$msg</div>";} ?>
   <div id="contact-details">
     <div id='details'>
-      <div><strong>Beneficiário:</strong> <?= $contact['beneficiario']?></div>
+      <div><strong>ID:</strong> <?= $contact['id']?></div>
       <div><strong>Nome:</strong> <?= $contact['nome']?></div>
       <div><strong>Celular:</strong> <?= "(".$contact['dddcelular'].") ".$contact['celular']?></div>
       <div><strong>Telefone1:</strong> <?= "(".$contact['dddtelefone1'].") ".$contact['telefone1']?></div>
@@ -14,6 +15,7 @@
 
   <div id="formContact">
     <form method="post" action="<?= base_url('oper/approach/getForm')?>">
+    <input type="hidden" name="publico" id="publico" value="<?= $contact['publico']?>">
       <div>
         <p>
           A1. Bom dia!/Boa tarde!/Boa noite!. 
@@ -21,26 +23,48 @@
         </p>
       </div>
       <div>
-        <p>Meu nome é <strong><?= $contact['operador']?></strong> sou pesquisador(a) da Opinião, 
+        <p>A2. Meu nome é <strong><?= $contact['operador']?></strong> sou pesquisador(a) da Opinião, 
         empresa que realiza pesquisas em todo o Brasil. 
-        Em nome da CASSI, estamos realizando uma pesquisa de opinião para avaliar os produtos e 
-        serviços oferecidos pela Instituição. Nossa entrevista tem duração de aproximadamente 
-        10 minutos. Você poderia colaborar respondendo algumas perguntas?</p>
-        <p>Para selecionar os entrevistados, fizemos um sorteio aleatório, 
-          a partir do banco de dados fornecido pela Sistel, 
-          e foi desta maneira que chegamos (ao)à Sr(a)..</p>
+        Nós estamos realizando uma pesquisa para a CASSI com o objetivo de avaliar questões relacionadas a planos de saúde.</p>
+
         <p>
-          <button type="button" class="btsim" id="bt1" onclick="condition('sim')">Sim</button>
-          <button type="button" class="btnao" id="bt2" onclick="condition('nao')">Não</button>
+          Para selecionar os entrevistados, fizemos um sorteio aleatório, a partir do banco de dados fornecido pela instituição, 
+          e foi desta maneira que chegamos ao(à) sr(a).
+        </p>
+
+        <p>O sr. (a) poderia colaborar conosco respondendo a nossa pesquisa sobre plano de saúde? Ela tem uma duração média de apenas 8 minutos.</p>
+        <p>
+          <button type="button" class="btsim" id="bt1" onclick="conditionInteresse('tem_interesse')">Sim</button>
+          <button type="button" class="btnao" id="bt2" onclick="conditionInteresse('nao_tem')">Não</button>
           <input type="hidden" name="filtro1" id="filtro1">
         </p>
-        <p id="categoria_nao">
-        Suas respostas são sigilosas e em nenhum momento sua identidade será revelada, respeitando o código de ética que rege o exercício da atividade de pesquisa, para sua segurança está entrevista será gravada e o código da entrevista é <strong><?= $contact['beneficiario']?></strong>.
+        <p id="msg-tem-interesse">
+          Suas respostas são sigilosas e em nenhum momento sua identidade será revelada, 
+          respeitando o código de ética que rege o exercício da atividade de pesquisa, 
+          para sua segurança está entrevista será gravada e o código da entrevista é <strong><?=$contact['id']?></strong>.
         </p>
       </div>
+      
+      <div id="ex-par-elegiveis">
+        <p>O(a) sr(a) tem autonomia para decidir e escolher seu plano de saúde?</p>
+        <p>
+          <button type="button" class="btsim" id="bt3" onclick="conditionEx('tem_poder_decisao')">Tem poder de decisão </button>
+          <button type="button" class="btnao" id="bt4" onclick="conditionEx('nao_tem_poder_decisao')">Não tem poder de decisão </button>
+          <input type="hidden" name="filtro2" id="filtro2">
+        </p>
+
+        <p id="msg-tem-poder-decisao">
+          Suas respostas são sigilosas e em nenhum momento sua identidade será revelada, 
+          respeitando o código de ética que rege o exercício da atividade de pesquisa, 
+          para sua segurança está entrevista será gravada e o código da entrevista é <strong><?=$contact['id']?></strong>.
+        </p>
+      </div>
+      
       <div class="quest-hidden" id="quest-hidden">
-        <p>A2. Caso o (a) Sr(a) esteja atarefado(a) neste momento, poderíamos entrar em contato em um outro horário, se preferir, em outro telefone? Sua participação é muito importante para nós!
-</p>
+        <p>Caso o (a) Sr(a) esteja atarefado(a) neste momento, 
+          poderíamos entrar em contato em um outro horário, se preferir, em outro telefone? 
+          Sua participação é muito importante para nós!
+        </p>
         <p>STATUS da ligação:</p>
         <select name="statusLigacao" id="statusLigacao" onchange="condition2(this.value)">
           <option value=""></option>
@@ -78,61 +102,92 @@
 </div>
 
 <script>
-  function condition(val){
-    if(val === 'sim')
-    {
-      var x = document.getElementById("quest-hidden");
-      x.style.display = "none";
+  const publico = document.getElementById("publico").value;
+  const questHidden = document.getElementById("quest-hidden");
+  const statusLigacao = document.getElementById("statusLigacao");
+  const btSubmit = document.getElementById("quest-hidden-submit");
+  const agenda = document.getElementById("quest-hidden-a3");
+  
+  function conditionInteresse(val){
+    const exParElegiveis = document.getElementById("ex-par-elegiveis");
+    const msgTemInteresse = document.getElementById("msg-tem-interesse");
+    
+    if(val === 'tem_interesse'){
+      questHidden.style.display = "none";
+      agenda.style.display = "none";
+      statusLigacao.value = "";
 
-      var x = document.getElementById("categoria_nao");
-      x.style.display = "block";
+      if(publico === 'Participantes'){
+        msgTemInteresse.style.display = "block";
+        exParElegiveis.style.display = "none";
+        btSubmit.style.display = "block";
+      }else{
+        msgTemInteresse.style.display = "none";
+        exParElegiveis.style.display = "block";
+        btSubmit.style.display = "none";
+      }
 
-      document.getElementById("filtro1").value = "sim";
+      document.getElementById("filtro1").value = "tem_interesse";
       document.getElementById("bt1").style.backgroundColor = "#ccc";
       document.getElementById("bt2").style.backgroundColor = "rgb(202, 86, 86)";
 
-      var y = document.getElementById("quest-hidden-submit");
-      y.style.display = "block";
     }else{
-      var x = document.getElementById("quest-hidden");
-      x.style.display = "block";
-
-      var x = document.getElementById("categoria_nao");
-      x.style.display = "none";
+      exParElegiveis.style.display = "none";
+      msgTemInteresse.style.display = "none";
+      questHidden.style.display = "block";
+      btSubmit.style.display = "none";
 
       document.getElementById("bt2").style.backgroundColor = "#ccc";
       document.getElementById("bt1").style.backgroundColor = "rgb(68, 157, 68)";
+      document.getElementById("filtro1").value = "nao_tem";
+    }
+  }
 
-      var y = document.getElementById("quest-hidden-submit");
-      y.style.display = "none";
-      document.getElementById("filtro1").value = "nao";
+  function conditionEx(val){
+    const msgTemPoderDecisao = document.getElementById("msg-tem-poder-decisao");
+    btSubmit.style.display = "block";
+
+    if(val === 'tem_poder_decisao')
+    {
+      msgTemPoderDecisao.style.display = "block";
+
+      document.getElementById("filtro2").value = "tem_poder_decisao";
+      document.getElementById("bt3").style.backgroundColor = "#ccc";
+      document.getElementById("bt4").style.backgroundColor = "rgb(202, 86, 86)";
+
+    }else{
+      msgTemPoderDecisao.style.display = "none";
+
+      document.getElementById("bt4").style.backgroundColor = "#ccc";
+      document.getElementById("bt3").style.backgroundColor = "rgb(68, 157, 68)";
+
+      document.getElementById("filtro2").value = "nao_tem_poder_decisao";
     }
   }
 
   function condition2(val){
-    var agenda = document.getElementById("quest-hidden-a3");
-    var btSumit = document.getElementById("quest-hidden-submit");
+    
 
     if(val === 'Agendado com dia e hora certo'){
       agenda.style.display = "block";
+      btSubmit.style.display = "none";
     }else if(val){
       agenda.style.display = "none";
-      btSumit.style.display = "block";
+      btSubmit.style.display = "block";
     }else{
       agenda.style.display = "none";
-      btSumit.style.display = "none";
+      btSubmit.style.display = "none";
     }
   }
 
   function condition3(){
-    var dia = document.getElementById("dia");
-    var hora = document.getElementById("hora");
-    var btSumit = document.getElementById("quest-hidden-submit");
+    const dia = document.getElementById("dia");
+    const hora = document.getElementById("hora");
 
     if(dia.value && hora.value){
-      btSumit.style.display = "block";
+      btSubmit.style.display = "block";
     }else{
-      btSumit.style.display = "none";
+      btSubmit.style.display = "none";
     }
   }
 </script>

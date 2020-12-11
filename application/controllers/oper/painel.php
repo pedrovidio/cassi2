@@ -14,11 +14,16 @@ class Painel extends CI_Controller {
       }
       $this->load->model('Respondentes_model','respondentes');
       $this->load->model('Oper_model','opers');
-      $this->load->model('meta_model','meta');
+      $this->load->model('Log_model','logs');
+      $this->load->model('Approach_model', 'approach');
     }
 
     public function index() {
       $menu['oper'] = $this->session->userdata('usuario');
+      if($this->session->userdata('idContato')){
+        $contact['operador'] = null;
+        $this->approach->definedOperatorToContact($this->session->userdata('idContato'), $contact);  
+      }
 
       $dados = array(
         'list_painel_oper'  => 'Disponivel'
@@ -27,13 +32,34 @@ class Painel extends CI_Controller {
 
       $headers['headers'] = ['bootstrap.min', 'style', 'form', 'home', 'menu', 'login'];
       $headers['js'] = 0;
+
       $this->load->view('slices/header', $headers);
       $this->load->view('painel/components/menu', $menu);
 
-      $send['contact'] = $this->respondentes->findAvailablesOper($this->session->userdata('usuario'));
+      // pega o id do último log
+      $log_id = $this->logs->last($this->session->userdata('id'));
+      if($log_id){
+        // identifica o tipo de publico
+        $public = $this->approach->findLastTypePublic($log_id);
+      }else{
+        $public = null;
+      }
+      // procura um contato com tipo de publico diferente, se existir 
+      $send['contact'] = $this->approach->findAvailables($public);
+      $contact['operador'] = $this->session->userdata('usuario');
+      // define o operador para o contato
+      $this->approach->definedOperatorToContact($send['contact']['id'], $contact);
+
+      $dados = array(
+        'idContato'  => $send['contact']['id']
+      );
+      $this->session->set_userdata($dados);
+
+      if($send['contact'] === null){
+        $send['msg'] = 'Você não possui mais contatos disponíveis. Contate o administrador.';
+      }
 
       $this->load->view('painel/approach/index.php',$send);
-      
       $this->load->view('slices/footer');
     }
 

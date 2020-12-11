@@ -10,7 +10,7 @@ class Redistribute_model extends CI_Model {
 	}
 
 	public function index() {
-		$this->db->where('Status','1');
+		$this->db->where('status','1');
 		$this->db->where('statusCota',true);
     return $this->db->get($this->table)->result_array();
 	}

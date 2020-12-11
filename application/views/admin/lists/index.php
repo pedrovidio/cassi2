@@ -40,7 +40,7 @@
               <input style="width:70px" class="column_filter form-control" id="col11_filter" type="text" placeholder="Status Ligação" disabled><span style="display:none">Status Ligação</span>
             </th>
             <th id="filter_col12" data-column="12">
-              <input style="width:70px" class="column_filter form-control" id="col12_filter" type="text" placeholder="Status" disabled><span style="display:none">Status</span>
+              <input style="width:70px" class="column_filter form-control" id="col12_filter" type="text" placeholder="Cota" disabled><span style="display:none">Cota</span>
             </th>
             <th id="filter_col13" data-column="13">
               <input style="width:70px" class="column_filter form-control" id="col13_filter" type="text" placeholder="Data da gravação" disabled><span style="display:none">Data da gravação</span>
@@ -59,7 +59,7 @@
       <tbody>
         <?php 
           foreach($contacts as $key => $val){
-            $status = ($val['statusCota'] == 1) ? 'Ativo' : 'Inativo';
+            $statusCota = ($val['statusCota'] == 1) ? 'Ativo' : 'Inativo';
             echo "<tr>";
               echo "<td>".$val['beneficiario']."</td>";
               echo "<td>".$val['nome']."</td>";
@@ -73,7 +73,7 @@
               echo "<td>".$val['hora']."</td>";
               echo "<td>".$val['operador']."</td>";
               echo "<td>".$val['statusLigacao']."</td>";
-              echo "<td>".$val['statusCota']."</td>";
+              echo "<td>".$statusCota."</td>";
               echo "<td>".implode('/',array_reverse(explode('-',$val['save_dt'])))."</td>";
               // echo "<td>".$val['municipio']."</td>";
               // echo "<td>".$val['sexo']."</td>";

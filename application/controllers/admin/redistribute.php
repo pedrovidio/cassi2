@@ -13,11 +13,10 @@ class Redistribute extends CI_Controller {
 
     public function index(){
       $opers = $this->opers->findActive();
-
       if(empty($opers)){
         redirect(base_url('admin/home/index/err'));
       }
-
+      
       $contacts = $this->redistribute->index();
       
       if($contacts){

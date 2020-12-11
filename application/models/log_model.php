@@ -8,6 +8,15 @@ class Log_model extends CI_Model {
 	{
 		parent::__construct();
   }
+
+  public function last($opers_id){
+    $this->db->select_max('id');
+    $this->db->where('opers_id', $opers_id);
+    $row = $this->db->get($this->table)->result_array();
+
+    $idCota = ($row)? $row[0]['id'] : null;
+    return $idCota;
+  }
   
   public function add($data){
     $this->db->insert($this->table, $data);

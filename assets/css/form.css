@@ -65,7 +65,16 @@
   opacity: 0.8;
 }
 
-#quest-hidden, #agendar, #quest-hidden-a3, .quest-hidden-submit{
+#quest-hidden, 
+#agendar, 
+#quest-hidden-a3, 
+.quest-hidden-submit, 
+#a1-motivo, 
+#ex-par-elegiveis, 
+#descricao,
+#msg-tem-interesse,
+#msg-tem-poder-decisao
+{
   display: none;
 }
 
