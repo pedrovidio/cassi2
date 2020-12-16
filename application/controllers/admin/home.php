@@ -20,20 +20,11 @@ class Home extends CI_Controller {
       );
       $this->session->set_userdata($dados);
 
-      if($this->uri->segment(4) === 'ok'){
-        $send['msg'] = 'Distribuição dos contatos realizado.';
-        $send['class'] = 'success';
-      }
-      if($this->uri->segment(4) === 'err'){
-        $send['msg'] = 'Nenhum operador logado. Clique no botão "Operadores" para ativá-los';
-        $send['class'] = 'danger';
-      }
-
       date_default_timezone_set('America/Sao_Paulo');
       $date = Date('Y-m-d');
       $send['totalFinalizadosHoje'] = count($this->respondentes->findByDate($date));
 
-      $headers['headers'] = ['bootstrap.min','menu','style', 'admin', 'home'];
+      $headers['headers'] = ['style','menu','home'];
       $headers['js'] = 0;
       $this->load->view('slices/header', $headers);
       $this->load->view('admin/components/menu');

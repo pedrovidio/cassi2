@@ -1,0 +1,23 @@
+.upload-form{
+  margin-top: 50px;
+}
+
+select{
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+button {
+  cursor: pointer;
+  background-color: rgb(42, 148, 194);
+  color: #fff;
+  padding: 6px 8px;
+  border: 0;
+  border-radius: 5px;
+}
+
+button:hover{
+  opacity: 0.8;
+  color: #fff;
+}

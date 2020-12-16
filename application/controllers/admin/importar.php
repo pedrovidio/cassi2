@@ -11,12 +11,24 @@ class Importar extends CI_Controller {
     }
 
   public function index($msg = NULL) {
+    $toast = array();
+    if($this->uri->segment(2) === 'ok'){
+      $toast['msg'] = 'Dados importados com sucesso.';
+      $toast['class'] = 'success';
+    }
+
+    if($this->uri->segment(2) === 'err'){
+      $toast['msg'] = 'Por favor, selecione um arquivo Excel pra importar.';
+      $toast['class'] = 'danger';
+    }
+
     if($msg === null) {$msg = array('msg' => '');}
-    $headers['headers'] = ['bootstrap.min', 'style', 'menu', 'admin', 'form'];
+    $headers['headers'] = ['style','menu','toast','upload'];
     $headers['js'] = 0;
 
     $this->load->view('slices/header', $headers);
     $this->load->view('admin/components/menu');
+    $this->load->view('components/toast', $toast);
     $this->load->view('admin/upload/form', $msg);
     $this->load->view('slices/footer');
   }
@@ -41,8 +53,7 @@ class Importar extends CI_Controller {
         $retorno = $this->importa->cadastro($contatos);
   
         if ($retorno == true){
-          $msg['msg'] = "Dados importados com sucesso";
-          $this->index($msg);
+          redirect(base_url('importar/ok'));
         }
       }else{
         // $this->importa->update($contatos);
@@ -52,7 +63,7 @@ class Importar extends CI_Controller {
       }
 
     } else {
-      echo "Por favor, selecione um arquivo Excel pra importar";
+      redirect(base_url('importar/err'));
     }
   }
 }

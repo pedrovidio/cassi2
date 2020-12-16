@@ -1,11 +1,11 @@
 .infos{
+  margin-top: 50px;
   display: grid;
   grid-template-columns: repeat(3,2fr);
+  gap: 20px;
 }
 
 .card{
-  margin: 50px 10px;
-  padding: 10px;
   width: 200px;
   height: 150px;
   text-align: center;
@@ -25,72 +25,9 @@
 .card strong{
   color: rgb(143, 142, 142);
   font-size: 16px;
+  margin-bottom: 20px;
 }
 
 .card h1{
   font-size: 26px;
-}
-
-a:hover{
-  text-decoration: none;
-}
-
-#dash{
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.filter{
-  padding: 10px 50px;
-  background-color: #707070;
-  margin-top: 10px;
-}
-
-.filter select{
-  border-radius: 5px;
-  border: 1px transparent;
-  padding: 5px 15px;
-}
-
-.filter select + select {
-  margin-left: 10px;
-}
-
-#clean{
-  background-color: rgb(42, 148, 194);
-  color: #fff;
-  padding: 5px;
-  border: 0;
-  border-radius: 5px;
-  margin: 0 20px;
-}
-
-#clean:hover{
-  opacity: 0.8;
-  color: #fff;
-}
-
-#finish, #day{
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-#finish:hover, #day:hover{
-  border: 1px solid rgb(42, 148, 194);
-}
-
-#finish h1, #day h1{
-  font-size: 18px;
-}
-
-@media (max-width: 750px){
-
-  #finish{
-    margin: 0px 0px 20px 0px;
-  }
 }

@@ -1,7 +1,8 @@
 <div id="menu" style="display: flex; justify-content: space-between">
   <img src="<?php echo base_url('assets/img/logo.png')?>" alt="logo opiniao" width="50" >
-  <div>
-    <a href="<?php echo base_url('painel')?>"><button>Disponíveis</button></a>  
+  <div id="menuBt">
+    <a href="<?php echo base_url('painel')?>"><button>Disponíveis nunca contatados</button></a>  
+    <a href="<?php echo base_url('painel/lists/contatados')?>"><button>Disponíveis - já contatados</button></a>
     <a href="<?php echo base_url('painel/lists/agendados')?>"><button>Agendados</button></a>
     <a href="<?php echo base_url('painel/lists/agendadosTodos')?>"><button>Agendados Todos</button></a>
     <a href="<?php echo base_url('painel/lists/andamento')?>"><button>Parcialmente preenchidos</button></a>

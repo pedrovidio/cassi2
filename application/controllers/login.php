@@ -10,6 +10,7 @@ class Login extends CI_Controller {
       $this->load->model('Login_model','login');
       $this->load->model('Oper_model','opers');
       $this->load->model('Respondentes_model','respondentes');
+      $this->load->model('Approach_model', 'approach');
     }
 
     public function index($msg = NULL) {
@@ -61,6 +62,11 @@ class Login extends CI_Controller {
       if ($this->session->userdata('usuario') == 'Administrador') {
         $this->session->sess_destroy();
         redirect(base_url('login'));
+      }
+
+      if($this->session->userdata('idContato')){
+        $definedContact['operador'] = null;
+        $this->approach->definedOperatorToContact($this->session->userdata('idContato'), $definedContact);  
       }
       
       $data['active'] = false;

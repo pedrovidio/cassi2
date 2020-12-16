@@ -34,8 +34,8 @@
 
         <p>O sr. (a) poderia colaborar conosco respondendo a nossa pesquisa sobre plano de saúde? Ela tem uma duração média de apenas 8 minutos.</p>
         <p>
-          <button type="button" class="btsim" id="bt1" onclick="conditionInteresse('tem_interesse')">Sim</button>
-          <button type="button" class="btnao" id="bt2" onclick="conditionInteresse('nao_tem')">Não</button>
+          <button type="button" class="bt-cati-oper btsim" id="bt1" onclick="conditionInteresse('tem_interesse')">Sim</button>
+          <button type="button" class="bt-cati-oper btnao" id="bt2" onclick="conditionInteresse('nao_tem')">Não</button>
           <input type="hidden" name="filtro1" id="filtro1">
         </p>
         <p id="msg-tem-interesse">
@@ -48,8 +48,8 @@
       <div id="ex-par-elegiveis">
         <p>O(a) sr(a) tem autonomia para decidir e escolher seu plano de saúde?</p>
         <p>
-          <button type="button" class="btsim" id="bt3" onclick="conditionEx('tem_poder_decisao')">Tem poder de decisão </button>
-          <button type="button" class="btnao" id="bt4" onclick="conditionEx('nao_tem_poder_decisao')">Não tem poder de decisão </button>
+          <button type="button" class="bt-cati-oper btsim" id="bt3" onclick="conditionEx('tem_poder_decisao')">Tem poder de decisão </button>
+          <button type="button" class="bt-cati-oper btnao" id="bt4" onclick="conditionEx('nao_tem_poder_decisao')">Não tem poder de decisão </button>
           <input type="hidden" name="filtro2" id="filtro2">
         </p>
 
@@ -96,7 +96,7 @@
       </div>
     <input type="hidden" name="id" value="<?= $contact['id']; ?>">
     <input type="hidden" name="cotas_id" value="<?= $contact['cotas_id']; ?>">
-    <input id="quest-hidden-submit" class="quest-hidden-submit" type="submit" class="btsuccess" value="Avançar">
+    <input id="quest-hidden-submit" class="quest-hidden-submit btSave" type="submit" value="Avançar">
     </form>
   </div>
 </div>

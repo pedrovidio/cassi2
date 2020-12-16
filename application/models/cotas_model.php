@@ -9,6 +9,7 @@ class Cotas_model extends CI_Model {
 	}
 
 	public function all() {
+		$this->db->order_by('status');
     return $this->db->get($this->table)->result_array();
 	}
 

@@ -1,0 +1,50 @@
+.content{
+  width: 100%;
+}
+
+.data-table{
+  padding: 15px 30px;
+}
+
+.table{
+  font-size: 14px;
+  width: 100%;
+  border-spacing: 1px;
+}
+
+.table td, .table th{
+  padding: 10px;
+}
+
+.table th{
+  background: rgba(230, 227, 227, 0.938);
+  border-bottom: 2px solid rgb(42, 148, 194);
+}
+
+.linha{
+  background-color: rgb(250, 250, 250);
+  transition: background-color 0.2s;
+}
+
+.linha:hover{
+  background-color: rgba(42, 148, 194, 0.205);
+}
+
+.table td{
+  text-align: center;
+}
+
+button{
+  border: 0px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+
+  transition: color, border 0.5s;
+}
+
+button:hover{
+  border: 2px solid rgb(42, 148, 194);;
+  color: rgb(42, 148, 194);;
+}

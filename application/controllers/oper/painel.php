@@ -21,8 +21,8 @@ class Painel extends CI_Controller {
     public function index() {
       $menu['oper'] = $this->session->userdata('usuario');
       if($this->session->userdata('idContato')){
-        $contact['operador'] = null;
-        $this->approach->definedOperatorToContact($this->session->userdata('idContato'), $contact);  
+        $definedContact['operador'] = null;
+        $this->approach->definedOperatorToContact($this->session->userdata('idContato'), $definedContact);  
       }
 
       $dados = array(
@@ -30,11 +30,11 @@ class Painel extends CI_Controller {
       );
       $this->session->set_userdata($dados);
 
-      $headers['headers'] = ['bootstrap.min', 'style', 'form', 'home', 'menu', 'login'];
+      $headers['headers'] = ['style', 'form', 'home', 'menu'];
       $headers['js'] = 0;
 
       $this->load->view('slices/header', $headers);
-      $this->load->view('painel/components/menu', $menu);
+      $this->load->view('oper/components/menu', $menu);
 
       // pega o id do último log
       $log_id = $this->logs->last($this->session->userdata('id'));
@@ -46,9 +46,9 @@ class Painel extends CI_Controller {
       }
       // procura um contato com tipo de publico diferente, se existir 
       $send['contact'] = $this->approach->findAvailables($public);
-      $contact['operador'] = $this->session->userdata('usuario');
+      $definedContact['operador'] = $this->session->userdata('usuario');
       // define o operador para o contato
-      $this->approach->definedOperatorToContact($send['contact']['id'], $contact);
+      $this->approach->definedOperatorToContact($send['contact']['id'], $definedContact);
 
       $dados = array(
         'idContato'  => $send['contact']['id']
@@ -59,7 +59,7 @@ class Painel extends CI_Controller {
         $send['msg'] = 'Você não possui mais contatos disponíveis. Contate o administrador.';
       }
 
-      $this->load->view('painel/approach/index.php',$send);
+      $this->load->view('oper/approach/index.php',$send);
       $this->load->view('slices/footer');
     }
 
@@ -67,6 +67,7 @@ class Painel extends CI_Controller {
       $dados = array(
         'list_painel_oper' => $this->uri->segment(3)
       );
+
       $this->session->set_userdata($dados);
       switch($this->uri->segment(3)){
         case "agendados":
@@ -82,17 +83,21 @@ class Painel extends CI_Controller {
           $send['list'] = 'finalizados';
           $contacts = $this->respondentes->findFinishedOper($this->session->userdata('usuario'));
         break;
+        case "contatados":
+          $send['list'] = 'contatados';
+          $contacts = $this->respondentes->findContactedOper($this->session->userdata('usuario'));
+        break;
       }
 
       $send['oper'] = $this->session->userdata('usuario');
 
-      $headers['headers'] = ['bootstrap.min', 'style', 'menu', 'admin', 'form', 'home'];
+      $headers['headers'] = ['style','listOper','menu'];
       $headers['js'] = 0;
       $this->load->view('slices/header', $headers);
-      $this->load->view('painel/components/menu', $send);
+      $this->load->view('oper/components/menu', $send);
       $send['contacts'] = $contacts;
 
-      $this->load->view('painel/lists/index.php',$send);
+      $this->load->view('oper/lists/index.php',$send);
       $this->load->view('slices/footer');
     }
   }

@@ -10,14 +10,26 @@ class Cotas extends CI_Controller {
     }
 
     public function index() {
+      $toast = array();
+      if($this->uri->segment(2) === 'ok'){
+        $toast['msg'] = 'Cotas cadastradas com sucesso.';
+        $toast['class'] = 'success';
+      }
+
+      if($this->uri->segment(2) === 'up'){
+        $toast['msg'] = 'Cotas atualizadas com sucesso.';
+        $toast['class'] = 'success';
+      }
+
       $cotas = $this->cotas->all();
       $send['cotas'] = ($cotas)? $cotas: null;
 
-      $headers['headers'] = ['bootstrap.min', 'style', 'menu', 'admin', 'list'];
+      $headers['headers'] = ['bootstrap.min', 'style', 'menu', 'admin', 'list','toast'];
       $headers['js'] = 1;
 
       $this->load->view('slices/header', $headers);
       $this->load->view('admin/components/menu');
+      $this->load->view('components/toast', $toast);
       $this->load->view('admin/cotas/index.php', $send);
       $this->load->view('slices/footer');
     }
@@ -33,7 +45,7 @@ class Cotas extends CI_Controller {
         $this->respondentes->ApplyIdCota($cota['id'], $publico, $uf);
       }
 
-      redirect(base_url('cotas'));
+      redirect(base_url('cotas/ok'));
     }
 
     public function update(){
@@ -44,6 +56,6 @@ class Cotas extends CI_Controller {
 
       $this->cotas->updateCotaRespondentes($data['id'], $cotas['status'] );
 
-      redirect(base_url('cotas'));
+      redirect(base_url('cotas/up'));
     }
   }

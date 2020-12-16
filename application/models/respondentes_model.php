@@ -135,7 +135,44 @@ class Respondentes_model extends CI_Model {
 		$this->db->join('cotas', 'respondentes.cotas_id = cotas.id');
 		$this->db->where('cotas.status',true);
 		$this->db->where('respondentes.operador',$oper);
+		$this->db->where('respondentes.statusLigacao', "Entrevista em andamento");
+		$this->db->where('respondentes.status', true);
+		$this->db->limit( 25, 0 );
+    return $this->db->get($this->table)->result_array();
+	}
+
+	public function findContactedOper($oper){
+		$this->db->select('
+		respondentes.id,
+		respondentes.beneficiario,
+    respondentes.nome,
+		respondentes.publico,
+		respondentes.uf,
+		respondentes.municipio,
+    respondentes.dddcelular,
+		respondentes.celular,
+		respondentes.dddtelefone1,
+    respondentes.telefone1,
+    respondentes.dddtelefone2,
+		respondentes.telefone2,
+		respondentes.status,
+		respondentes.statusLigacao,
+		respondentes.dia,
+		respondentes.hora,
+		respondentes.operador,
+		respondentes.logs_id,
+		respondentes.cotas_id,
+		respondentes.statusCota,
+		cotas.id as cotas_id,
+		cotas.cotas,
+		cotas.meta,
+		cotas.qtd
+		');
+		$this->db->join('cotas', 'respondentes.cotas_id = cotas.id');
+		$this->db->where('cotas.status',true);
+		$this->db->where('respondentes.operador',$oper);
 		$this->db->where('respondentes.statusLigacao is not null');
+		$this->db->where('respondentes.statusLigacao <> "Entrevista em andamento"');
 		$this->db->where('respondentes.status', true);
 		$this->db->limit( 25, 0 );
     return $this->db->get($this->table)->result_array();

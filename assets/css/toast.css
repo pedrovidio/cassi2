@@ -1,0 +1,33 @@
+#msg_import{
+  margin-top: 10px;
+  width: 300px;
+  
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+
+  animation: moveToast 6s;
+  position: absolute;
+  top: 50px;
+  opacity: 0;
+}
+
+.success{
+  background-color: rgba(54, 124, 54, 0.274);
+  border: 1px solid rgb(54, 124, 54);
+  color:rgb(54, 124, 54);
+}
+
+.danger{
+  background-color: rgba(202, 86, 86, 0.274);
+  border: 1px solid rgb(202, 86, 86);
+  color:rgb(202, 86, 86);
+}
+
+@keyframes moveToast {
+  0% {right: 0px; opacity:0}
+  10% {right: 40px; opacity:1}
+  90% {right: 40px; opacity:1}
+  100%{right:0px; opacity:0}
+}
