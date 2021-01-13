@@ -10,6 +10,8 @@ class Cotas extends CI_Controller {
     }
 
     public function index() {
+      $this->recalculate();
+
       $toast = array();
       if($this->uri->segment(2) === 'ok'){
         $toast['msg'] = 'Cotas cadastradas com sucesso.';
@@ -39,10 +41,10 @@ class Cotas extends CI_Controller {
       foreach($cotas as $cota){
         $filters = explode('/', $cota['cotas']);
 
-        $publico = $filters[0];
-        $uf = $filters[1];
+        $empresa = $filters[0];
+        $tipo = $filters[1];
 
-        $this->respondentes->ApplyIdCota($cota['id'], $publico, $uf);
+        $this->respondentes->ApplyIdCota($cota['id'], $empresa, $tipo);
       }
 
       redirect(base_url('cotas/ok'));
@@ -52,10 +54,38 @@ class Cotas extends CI_Controller {
       $cotas['status'] = ($this->uri->segment(5) === "Ativo")? 0: 1;
       $this->cotas->update($this->uri->segment(4), $cotas);
 
-      $data = $this->cotas->findById($this->uri->segment(4));
-
-      $this->cotas->updateCotaRespondentes($data['id'], $cotas['status'] );
-
       redirect(base_url('cotas/up'));
+    }
+
+    public function recalculate(){
+      $this->load->helper('api/get_helper');
+
+      $survey = "cassipesquisa_2020";
+      $variables = "publico;uf";
+      $sample = 'Perfil_Rendimento <> ""';
+
+      $response = get($survey, $variables, $sample);
+
+      foreach($response as $key => $value){
+        if($key > 1 && $response[$key] !== false){
+          $cota[] = implode("/", $value);
+        }
+      }
+
+      $cotas = array_count_values($cota);
+
+      $cotasBd = $this->cotas->all();
+      foreach($cotas as $cota => $count){
+        foreach($cotasBd as $keyBd => $cotaBd){
+          if($cota === $cotaBd['cotas']){
+            $cotaBd['qtd'] = $count;
+            $cotaBd['status'] = ($cotaBd['meta'] <= $count)? false : true;
+            $cotasBd[$keyBd] = $cotaBd;
+            break;
+          }
+        }
+      }
+      
+      $this->cotas->updateQtd($cotasBd);
     }
   }

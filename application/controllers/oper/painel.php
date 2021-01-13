@@ -46,6 +46,9 @@ class Painel extends CI_Controller {
       }
       // procura um contato com tipo de publico diferente, se existir 
       $send['contact'] = $this->approach->findAvailables($public);
+      if($send['contact'] === null) {
+        $send['contact'] = $this->approach->findContacted(); 
+      }
       $definedContact['operador'] = $this->session->userdata('usuario');
       // define o operador para o contato
       $this->approach->definedOperatorToContact($send['contact']['id'], $definedContact);

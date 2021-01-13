@@ -37,6 +37,7 @@
   padding: 10px;
   border-radius: 5px;
   display: none;
+  cursor: pointer;
 }
 
 .btsim{
@@ -45,6 +46,7 @@
   border: 0;
   width: 150px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .btnao{
@@ -53,6 +55,7 @@
   border: 0;
   width: 150px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 #quest-hidden-submit{
@@ -61,6 +64,7 @@
 
 .btsim:hover, .btnao:hover, .btsuccess:hover{
   opacity: 0.8;
+  cursor: pointer;
 }
 
 #quest-hidden, 

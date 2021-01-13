@@ -3,7 +3,7 @@
     <table class="table">
     <thead>
       <tr>
-        <th>Beneficiário</th>
+        <th>ID</th>
         <th>Nome</th>
         <th>Data</th>
         <th>Hora</th>
@@ -17,7 +17,7 @@
         foreach($contacts as $key => $val){
           echo "
           <tr class='linha'>
-            <td>".$val['beneficiario']."</td>
+            <td>".$val['id']."</td>
             <td>".$val['nome']."</td>
             <td>".implode('/',array_reverse(explode('-',$val['dia'])))."</td>
             <td>".$val['hora']."</td>

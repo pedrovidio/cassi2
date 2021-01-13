@@ -1,5 +1,5 @@
 .infos{
-  margin-top: 50px;
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3,2fr);
   gap: 20px;
@@ -18,6 +18,25 @@
   box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
 }
 
+.card-1{
+  animation: moveCards 0.6s;
+}
+.card-2{
+  animation: moveCards 0.8s;
+}
+.card-3{
+  animation: moveCards 1s;
+}
+.card-4{
+  animation: moveCards 1.2s;
+}
+.card-5{
+  animation: moveCards 1.4s;
+}
+.card-6{
+  animation: moveCards 1.6s;
+}
+
 .card:hover, .webr:hover{
   border: 1px solid rgb(42, 148, 194);
 }
@@ -30,4 +49,16 @@
 
 .card h1{
   font-size: 26px;
+}
+
+@keyframes moveCards {
+  from {
+    transform: translateX(-90px);
+    opacity: 0;
+
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
 }

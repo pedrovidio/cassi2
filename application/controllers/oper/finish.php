@@ -23,11 +23,11 @@ class Finish extends CI_Controller {
       switch($this->uri->segment(5)){
         case 'Finalizado':
           $status = 'Finalizado';
+          $respondente['save_dt'] = Date('Y-m-d');
           $respondente['status'] = 0;
         break;
         case 'andamento':
           $status = 'Entrevista em andamento';
-          $respondente['save_dt'] = Date('Y-m-d');
           $respondente['status'] = 1;
         break;
         case 'recusa':

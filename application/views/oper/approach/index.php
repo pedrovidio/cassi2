@@ -46,10 +46,10 @@
       </div>
       
       <div id="ex-par-elegiveis">
-        <p>O(a) sr(a) tem autonomia para decidir e escolher seu plano de saúde?</p>
+        <p>O sr.(a) tem influência na decisão de escolha do seu plano de saúde?</p>
         <p>
-          <button type="button" class="bt-cati-oper btsim" id="bt3" onclick="conditionEx('tem_poder_decisao')">Tem poder de decisão </button>
-          <button type="button" class="bt-cati-oper btnao" id="bt4" onclick="conditionEx('nao_tem_poder_decisao')">Não tem poder de decisão </button>
+          <button type="button" class="bt-cati-oper btsim" id="bt3" onclick="conditionEx('tem_poder_decisao')">Sim</button>
+          <button type="button" class="bt-cati-oper btnao" id="bt4" onclick="conditionEx('nao_tem_poder_decisao')">Não</button>
           <input type="hidden" name="filtro2" id="filtro2">
         </p>
 

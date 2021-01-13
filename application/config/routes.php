@@ -45,16 +45,19 @@ $route['home'] = "admin/home";
 
 /** admin operadores */
 $route['operadores'] = "admin/operadores";
+$route['operadores/:any'] = "admin/operadores/index/$1";
 $route['operadores/form'] = "admin/operadores/form";
 $route['operadores/delete/:number'] = "admin/operadores/delete/$1";
 $route['operadores/update/:number'] = "admin/operadores/update/$1";
 
 /** admin importar */
 $route['importar'] = "admin/importar";
+$route['importar/:any'] = "admin/importar/index/$1";
 $route['importar/upload'] = "admin/importar/upload";
 
 /** admin cotas */
 $route['cotas'] = "admin/cotas";
+$route['cotas/:any'] = "admin/cotas/$1";
 $route['cotas/add'] = "admin/cotas/add";
 
 /** admin listas respondentes segmentadas */

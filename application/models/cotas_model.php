@@ -38,12 +38,6 @@ class Cotas_model extends CI_Model {
     return $this->db->insert_id();
 	}
 
-	public function updateCotaRespondentes($cotas_id, $statusCota){
-		$respondentes['statusCota'] = $statusCota;
-		$this->db->where('cotas_id',$cotas_id);
-		return $this->db->update('respondentes', $respondentes);
-	}
-
 	public function update($id, $data){
 		$this->db->where('id',$id);
 		return $this->db->update($this->table, $data);
@@ -52,5 +46,10 @@ class Cotas_model extends CI_Model {
 	public function delete($id){
 		$this->db->where('id', $id);
 		return $this->db->delete($this->table);
+	}
+
+	public function updateQtd($cotas){
+		$this->db->update_batch($this->table, $cotas,'id');
+		return 1;
 	}
 }
