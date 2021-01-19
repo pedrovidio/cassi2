@@ -16,6 +16,7 @@ class Painel extends CI_Controller {
       $this->load->model('Oper_model','opers');
       $this->load->model('Log_model','logs');
       $this->load->model('Approach_model', 'approach');
+      $this->load->model('Elegiveis_model', 'elegiveis');
     }
 
     public function index() {
@@ -49,6 +50,43 @@ class Painel extends CI_Controller {
       if($send['contact'] === null) {
         $send['contact'] = $this->approach->findContacted(); 
       }
+      $definedContact['operador'] = $this->session->userdata('usuario');
+      // define o operador para o contato
+      $this->approach->definedOperatorToContact($send['contact']['id'], $definedContact);
+
+      $dados = array(
+        'idContato'  => $send['contact']['id']
+      );
+      $this->session->set_userdata($dados);
+
+      if($send['contact'] === null){
+        $send['msg'] = 'Você não possui mais contatos disponíveis. Contate o administrador.';
+      }
+
+      $this->load->view('oper/approach/index.php',$send);
+      $this->load->view('slices/footer');
+    }
+
+    public function elegiveis() {
+      $menu['oper'] = $this->session->userdata('usuario');
+      if($this->session->userdata('idContato')){
+        $definedContact['operador'] = null;
+        $this->approach->definedOperatorToContact($this->session->userdata('idContato'), $definedContact);  
+      }
+
+      $dados = array(
+        'list_painel_oper'  => 'Disponivel'
+      );
+      $this->session->set_userdata($dados);
+
+      $headers['headers'] = ['style', 'form', 'home', 'menu'];
+      $headers['js'] = 0;
+
+      $this->load->view('slices/header', $headers);
+      $this->load->view('oper/components/menu', $menu);
+
+      $send['contact'] = $this->elegiveis->findAvailables();
+      
       $definedContact['operador'] = $this->session->userdata('usuario');
       // define o operador para o contato
       $this->approach->definedOperatorToContact($send['contact']['id'], $definedContact);

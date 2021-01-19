@@ -80,6 +80,7 @@ $route['distribuir'] = "admin/redistribute";
 
 /** oper home*/
 $route['painel'] = "oper/painel";
+$route['painel/elegiveis'] = "oper/painel/elegiveis";
 $route['painel/lists/:any'] = "oper/painel/lists/$1";
 
 $route['finish/:number'] = "finish/$1";

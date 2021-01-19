@@ -3,6 +3,7 @@
   <div id="menuBt">
     <a href="<?php echo base_url('painel')?>"><button class="bt-cati">Disponíveis nunca contatados</button></a>  
     <a href="<?php echo base_url('painel/lists/contatados')?>"><button class="bt-cati">Disponíveis - já contatados</button></a>
+    <a href="<?php echo base_url('painel/elegiveis')?>"><button class="bt-cati">Elegíveis</button></a>
     <a href="<?php echo base_url('painel/lists/agendados')?>"><button class="bt-cati">Agendados</button></a>
     <a href="<?php echo base_url('painel/lists/agendadosTodos')?>"><button class="bt-cati">Agendados Todos</button></a>
     <a href="<?php echo base_url('painel/lists/andamento')?>"><button class="bt-cati">Parcialmente preenchidos</button></a>
